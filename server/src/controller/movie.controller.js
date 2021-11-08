@@ -29,7 +29,10 @@ export const Remove = async (req, res) => {
 }
 
 export const Find = async (req, res) => {
-  await find()
+
+  const name = req.body.name ? {name: req.body.name} : {}
+
+  await find(name)
     .then((movie) => res.send({
       status: 'success',
       message: 'Movie found successfully',
