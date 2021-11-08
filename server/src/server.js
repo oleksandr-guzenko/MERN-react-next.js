@@ -1,7 +1,8 @@
-import Express, {urlencoded} from 'express'
-import cors from 'cors'
-import homeRouters from './routes/home.routes'
+import Express from 'express'
 import dotenv from 'dotenv'
+import cors from 'cors'
+import homeRoutes from './routes/home.routes'
+import movieRoutes from './routes/movie.routes'
 import './db'
 
 dotenv.config()
@@ -13,9 +14,10 @@ const port = process.env.PORT || 3000
 app.set('port', port)
 
 app.use(cors())
-app.use(urlencoded({ extended: true }))
+app.use(Express.urlencoded({extended: true}))
 app.use(Express.json())
 
-app.use(homeRouters)
+app.use(homeRoutes)
+app.use('/api', movieRoutes)
 
 export default app
