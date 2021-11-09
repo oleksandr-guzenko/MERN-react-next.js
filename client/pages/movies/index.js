@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Head from 'next/head'
 import Container from '../../components/container/container'
+import Button from '../../components/button/button'
 
 export default function Movies() {
   return (
@@ -18,8 +19,10 @@ export default function Movies() {
         necessitatibus, quam quisquam quis, quisquam quisquam.
       </p>{' '}
 
-      <Link href="/movies/new">
-        <a>Add new movie</a>
+      <Link href="/movies/create">
+        <Button className="button" disabled={false} type="button" onClick={() => {}}>
+          Create
+        </Button>
       </Link>
     </Container>
   )
