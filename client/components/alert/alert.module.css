@@ -1,0 +1,17 @@
+.success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #3c763d;
+}
+
+.warning {
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+  color: #8a6d3b;
+}
+
+.error {
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+  color: #a0413d;
+}

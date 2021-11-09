@@ -1,3 +1,24 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "never"],
+    "object-curly-spacing": ["error", "never"],
+    "arrow-parens": ["error", "always"]
+  },
+  "globals": {
+    "React": "writable"
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  }
 }
