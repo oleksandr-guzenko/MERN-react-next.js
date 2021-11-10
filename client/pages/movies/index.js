@@ -1,9 +1,10 @@
-import Link from 'next/link'
 import Head from 'next/head'
+import PropTypes from 'prop-types'
 import Container from '../../components/container/container'
-import Button from '../../components/button/button'
+import styles from '../../styles/movies.module.css'
 
-export default function Movies() {
+export default function Movies({movies}) {
+
   return (
     <Container>
       <Head>
@@ -17,13 +18,34 @@ export default function Movies() {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
         voluptatem, doloremque, quibusdam quisquam dolorum, quidem
         necessitatibus, quam quisquam quis, quisquam quisquam.
-      </p>{' '}
-
-      <Link href="/movies/create">
-        <Button className="button" disabled={false} type="button" onClick={() => {}}>
-          Create
-        </Button>
-      </Link>
+      </p>
+      
+      {
+        movies.map((movie) => {
+          return (
+            <div className={styles.movie_container} key={movie._id}>
+              <h2>{movie.name}</h2>
+              <p>{movie.duration}</p>
+            </div>
+          )
+        })
+      }
+      
     </Container>
   )
+}
+
+export const getStaticProps = async () => {
+  const res = await fetch('http://localhost:4000/api/movie/find')
+  const movies = await res.json()
+
+  return {
+    props: {
+      movies
+    }
+  }
+}
+
+Movies.propTypes = {
+  movies: PropTypes.array
 }

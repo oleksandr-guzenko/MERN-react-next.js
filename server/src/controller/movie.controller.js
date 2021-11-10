@@ -28,16 +28,9 @@ export const Remove = async (req, res) => {
     }))
 }
 
-export const Find = async (req, res) => {
-
-  const name = req.body.name ? {name: req.body.name} : {}
-
-  await find(name)
-    .then((movie) => res.send({
-      status: 'success',
-      message: 'Movie found successfully',
-      Movies: movie
-    }))
+export const Find = async (_, res) => {
+  await find()
+    .then((movies) => res.send(movies))
     .catch((err) => res.send({
       status: 'failed',
       message: `Error: ${err}`
