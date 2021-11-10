@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Container from '../components/container/container'
-
 export default function Home() {
+
   return (
     <Container>
       <Head>
@@ -10,10 +10,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <main className="main">
-        <h1>First page in next js</h1>
-        <h3>Hello World!</h3>
-      </main>
+      
+
     </Container>
   )
 }
