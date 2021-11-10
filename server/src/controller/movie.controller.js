@@ -28,12 +28,13 @@ export const Remove = async (req, res) => {
     }))
 }
 
-export const Find = async (_, res) => {
-  await find()
+export const Find = async (req, res) => {
+  const name = req.params.name ? {name: req.params.name} : {}
+
+  await find(name)
     .then((movies) => res.send(movies))
     .catch((err) => res.send({
       status: 'failed',
       message: `Error: ${err}`
     }))
-
 }
