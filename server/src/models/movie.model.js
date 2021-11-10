@@ -12,7 +12,7 @@ const MovieSchema = Schema({
 
 const Movie = model('Movie', MovieSchema)
 
-export const find = (name) => Movie.find(name)
+export const find = () => Movie.find({})
 export const create = (movie) => movie.save()
 export const remove = (name) => Movie.remove({name})
 
