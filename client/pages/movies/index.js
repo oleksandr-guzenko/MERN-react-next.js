@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import PageTitle from '../../components/pageTitle/pageTitle'
 import PropTypes from 'prop-types'
-import Container from '../../components/container/container'
-import styles from '../../styles/movies.module.css'
+import PageTitle from 'components/pageTitle/pageTitle'
+import Container from 'components/container/container'
+import styles from 'styles/movies.module.css'
 
 export default function Movies({movies}) {
   return (
