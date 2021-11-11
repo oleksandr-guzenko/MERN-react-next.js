@@ -15,9 +15,9 @@ export const Create = async (req, res) => {
 }
 
 export const Remove = async (req, res) => {
-  const {name} = req.body
+  const {id} = req.body
 
-  await remove(name)
+  await remove(id)
     .then(() => res.send({
       status: 'success',
       message: 'Movie deleted successfully'
@@ -29,9 +29,9 @@ export const Remove = async (req, res) => {
 }
 
 export const Find = async (req, res) => {
-  const name = req.params.name ? {name: req.params.name} : {}
+  const id = req.params.id ?? undefined
 
-  await find(name)
+  await find(id)
     .then((movies) => res.send(movies))
     .catch((err) => res.send({
       status: 'failed',
