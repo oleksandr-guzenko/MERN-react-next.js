@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import PropTypes from 'prop-types'
 import Container from '../../components/container/container'
 import styles from '../../styles/movies.module.css'
@@ -23,10 +24,12 @@ export default function Movies({movies}) {
       {
         movies.map((movie) => {
           return (
-            <div className={styles.movie_container} key={movie._id}>
-              <h2>{movie.name}</h2>
-              <p>{movie.duration}</p>
-            </div>
+            <Link href={`/movies/${movie._id}`} key={movie._id}>
+              <a className={styles.movie_container}>
+                <h2>{movie.name}</h2>
+                <p>{movie.duration}</p>
+              </a>
+            </Link>
           )
         })
       }
