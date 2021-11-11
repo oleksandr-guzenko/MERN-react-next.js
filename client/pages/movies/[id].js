@@ -1,15 +1,19 @@
 import PropTypes from 'prop-types'
+import PageTitle from '../../components/pageTitle/pageTitle'
+import Container from '../../components/container/container'
 
 export default function Details({movie}) {
   return (
-    <div key={movie._id}>
-      <h1>Details</h1>
+    <>
+      <PageTitle title={movie.name} />
+      <Container key={movie._id}>
+        <h1>Details</h1>
+        <h2>{movie.name}</h2>
+        <p>{movie.duration}</p>
+        <p>{movie.synopsis}</p>
 
-      <h2>{movie.name}</h2>
-      <p>{movie.duration}</p>
-      <p>{movie.synopsis}</p>
-
-    </div>
+      </Container>
+    </>
   )
 }
 
