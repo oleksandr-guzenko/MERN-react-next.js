@@ -1,8 +1,14 @@
 import PropTypes from 'prop-types'
-import '../styles/globals.css'
+import NavBar from 'components/navbar/navbar'
+import 'styles/globals.css'
 
 function App({Component, pageProps}) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <NavBar />
+      <Component {...pageProps} />
+    </>
+  )
 }
 
 App.propTypes = {
