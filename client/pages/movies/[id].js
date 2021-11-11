@@ -8,7 +8,6 @@ export default function Details({movie}) {
       <PageTitle title={movie.name} />
       <Container key={movie._id}>
         <h1>Details</h1>
-
         <h2>{movie.name}</h2>
         <p>{movie.duration}</p>
         <p>{movie.synopsis}</p>

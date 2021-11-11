@@ -5,7 +5,6 @@ import Container from '../../components/container/container'
 import styles from '../../styles/movies.module.css'
 
 export default function Movies({movies}) {
-
   return (
     <>
       <PageTitle title="Movies" />
