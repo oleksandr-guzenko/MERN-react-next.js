@@ -12,8 +12,14 @@ const MovieSchema = Schema({
 
 const Movie = model('Movie', MovieSchema)
 
-export const find = (name) => Movie.find(name)
+export const find = (id) => {
+  if(id)
+    return Movie.findById(id)
+
+  return Movie.find()
+}
+
 export const create = (movie) => movie.save()
-export const remove = (name) => Movie.remove({name})
+export const remove = (id) => Movie.remove({id})
 
 export default Movie
