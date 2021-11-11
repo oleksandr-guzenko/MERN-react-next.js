@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-import PageTitle from '../../components/pageTitle/pageTitle'
-import Container from '../../components/container/container'
+import PageTitle from 'components/pageTitle/pageTitle'
+import Container from 'components/container/container'
 
 export default function Details({movie}) {
   return (
