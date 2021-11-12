@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import {get} from 'helpers/fetchWrapper'
 import PageTitle from 'components/pageTitle/pageTitle'
 import Container from 'components/container/container'
 
@@ -28,8 +29,7 @@ export default function Details({movie}) {
  * @returns {Object}
  */
 export const getStaticPaths = async () => {
-  const res = await fetch('http://localhost:4000/api/movie/find/')
-  const movies = await res.json()
+  const movies = await get(`${process.env.MOVIES_API_URL}/find`)
 
   const paths = movies.map((movie) => ({
     params: {id: movie._id}
@@ -47,10 +47,8 @@ export const getStaticPaths = async () => {
  * @param {*} context 
  * @returns {Object}
  */
-export const getStaticProps = async (context) => {
-  const id = context.params.id
-  const res = await fetch(`http://localhost:4000/api/movie/find/${id}`)
-  const movie = await res.json()
+export const getStaticProps = async ({params}) => {
+  const movie = await get(`${process.env.MOVIES_API_URL}/find/${params.id}`)
 
   return {
     props: {
