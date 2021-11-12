@@ -1,4 +1,4 @@
-import Movie, {create, find, remove} from '../models/movie.model'
+import Movie, {create, find, remove, update} from '../models/movie.model'
 
 export const Create = async (req, res) => {
   const {name, duration, synopsis, images} = req.body
@@ -33,6 +33,20 @@ export const Find = async (req, res) => {
 
   await find(id)
     .then((movies) => res.send(movies))
+    .catch((err) => res.send({
+      status: 'failed',
+      message: `Error: ${err}`
+    }))
+}
+
+export const Update = async (req, res) => {
+  const {id, name, duration, synopsis, images} = req.body
+
+  await update(id, Movie({name, duration, synopsis, images}))
+    .then(() => res.send({
+      status: 'success',
+      message: 'Movie updated successfully',
+    }))
     .catch((err) => res.send({
       status: 'failed',
       message: `Error: ${err}`

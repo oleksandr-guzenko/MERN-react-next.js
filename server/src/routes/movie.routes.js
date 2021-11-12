@@ -1,10 +1,12 @@
 import {Router} from 'express'
-import {Create, Find, Remove} from '../controller/movie.controller'
+import {verifyToken} from '../middleware/auth'
+import {Create, Find, Remove, Update} from '../controller/movie.controller'
 
 const router = Router()
 
-router.post('/movie/create', Create)
-router.get('/movie/find/:id?', Find)
-router.delete('/movie/remove', Remove)
+router.post('/movie/create', verifyToken, Create)
+router.get('/movie/find/:id?', verifyToken, Find)
+router.put('/movie/update/:id', verifyToken, Update)
+router.delete('/movie/remove', verifyToken, Remove)
 
 export default router
