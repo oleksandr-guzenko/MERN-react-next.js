@@ -1,10 +1,25 @@
 import {Schema, model} from 'mongoose'
 
 const MovieSchema = Schema({
-  name: {type: String, required: true, unique: true},
-  duration: {type: String, required: true},
-  synopsis: {type: String, unique: true},
-  images: {type: [String]},
+  name: {
+    type: String, 
+    required: true, 
+    unique: true, 
+    trim: true
+  },
+  duration: {
+    type: String, 
+    required: true, 
+    trim: true
+  },
+  synopsis: {
+    type: String, 
+    unique: true, 
+    trim: true
+  },
+  images: {
+    type: [String]
+  },
 }, {
   collection: 'Movies',
   versionKey: 'MERN_STACK_DB_MOVIES'
@@ -20,6 +35,9 @@ export const find = (id) => {
 }
 
 export const create = (movie) => movie.save()
-export const remove = (id) => Movie.remove({id})
+
+export const remove = (id) => Movie.findByIdAndDelete(id)
+
+export const update = (id, movie) => Movie.findByIdAndUpdate(id, movie)
 
 export default Movie
