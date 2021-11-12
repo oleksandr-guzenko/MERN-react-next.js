@@ -1,6 +1,6 @@
-import {links} from 'config/navbar.config'
-import styles from './navbar.module.css'
 import Link from 'next/link'
+import styles from './navbar.module.css'
+import {links} from 'config/navbar.config'
 
 export default function NavBar() {
   return (

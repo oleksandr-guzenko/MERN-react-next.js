@@ -2,6 +2,12 @@ import PropTypes from 'prop-types'
 import PageTitle from 'components/pageTitle/pageTitle'
 import Container from 'components/container/container'
 
+/**
+ * @description Details page for a movie
+ * 
+ * @param {*} props
+ * @returns {Component}
+ */
 export default function Details({movie}) {
   return (
     <>
@@ -11,12 +17,16 @@ export default function Details({movie}) {
         <h2>{movie.name}</h2>
         <p>{movie.duration}</p>
         <p>{movie.synopsis}</p>
-
       </Container>
     </>
   )
 }
 
+/**
+ * @description PropTypes for the Details component
+ * 
+ * @returns {Object}
+ */
 export const getStaticPaths = async () => {
   const res = await fetch('http://localhost:4000/api/movie/find/')
   const movies = await res.json()
@@ -31,6 +41,12 @@ export const getStaticPaths = async () => {
   }
 }
 
+/**
+ * @description Fetches the movie data
+ * 
+ * @param {*} context 
+ * @returns {Object}
+ */
 export const getStaticProps = async (context) => {
   const id = context.params.id
   const res = await fetch(`http://localhost:4000/api/movie/find/${id}`)
