@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import PropTypes from 'prop-types'
+import {get} from 'helpers/fetchWrapper'
 import PageTitle from 'components/pageTitle/pageTitle'
 import Container from 'components/container/container'
 import styles from 'styles/movies.module.css'
@@ -61,8 +62,7 @@ export default function Movies({movies}) {
  * @returns {Object}
  */
 export const getStaticProps = async () => {
-  const res = await fetch('http://localhost:4000/api/movie/find')
-  const movies = await res.json()
+  const movies = await get(`${process.env.MOVIES_API_URL}/find`)
 
   return {
     props: {
