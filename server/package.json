@@ -5,26 +5,32 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "clear": "rm -rf build",
+    "build": "npm run clear && babel src -d build",
+    "start": "npm run build && node build/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
-    "eslint": "eslint ."
+    "eslint": "eslint . --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.24.0",
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/runtime": "^7.16.3",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.1.4",
     "mongoose": "^6.0.12",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/node": "^7.16.0",
-    "@babel/preset-env": "^7.16.0",
     "eslint": "^8.2.0",
     "nodemon": "^2.0.14"
   }
