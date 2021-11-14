@@ -1,13 +1,11 @@
 import Express from 'express'
-import dotenv from 'dotenv'
 import morgan from 'morgan'
 import cors from 'cors'
 import homeRoutes from './routes/home.routes'
 import userRoutes from './routes/user.routes'
 import movieRoutes from './routes/movie.routes'
+import './config/dotenv.config'
 import './db'
-
-dotenv.config()
 
 const app = Express()
 
