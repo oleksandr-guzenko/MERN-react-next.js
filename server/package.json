@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Application on the theme of movies making use of the Client and Server method, where the server provides us with an api developed with NodeJs and MongoDB that will be consumed by the Client which is developed with NextJs and React technology.",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec babel-node src/index.js",
