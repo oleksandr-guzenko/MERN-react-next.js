@@ -1,5 +1,7 @@
 # MERN STACK DB MOVIES
 
+[![Twitter](https://img.shields.io/twitter/follow/Derian_Cordoba?label=Follow&style=social)](https://twitter.com/Derian_Cordoba)
+
 - <div align="justify">
       Application on the theme of movies making use of the Client and Server method, where the server provides us with an api developed with NodeJs and MongoDB that will be consumed by the Client which is developed with NextJs and React technology.
   </div>

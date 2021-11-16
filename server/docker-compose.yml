@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  web:
+    container_name: movies-app
+    restart: always
+    build: .
+    # env_file: .env
+    ports:
+      - 4000:4000
+    volumes:
+      - .:/usr/src/app
+    #    links:
+    #      - mongo
+#  mongo:
+#    container_name: movies-mongo
+#    image: mongo
+#    ports:
+#      - "27017:27017"
+#    logging:
+#      driver: none
