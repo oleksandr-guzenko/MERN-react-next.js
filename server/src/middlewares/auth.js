@@ -11,9 +11,9 @@ export const verifyToken = (req, res, next) => {
       })
 
     const decoded = jsonWebToken.verify(token, process.env.JWT_SECRET)
-    req.user = decoded
+    req.userId = decoded.id
 
-    const user = User.findById(req.user.id, {password: 0})
+    const user = User.findById(req.userId, {password: 0})
     if (!user)
       return res.status(404).send({
         message: 'User not found.'
