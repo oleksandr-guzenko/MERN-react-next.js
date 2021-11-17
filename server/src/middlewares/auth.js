@@ -3,7 +3,8 @@ import User from '../models/user.model'
 
 export const verifyToken = (req, res, next) => {
   try {
-    const token = req.headers['x-access-token']
+    const token = req.headers['x-auth-token']
+
     if (!token)
       return res.status(401).send({
         message: 'No token provided.'
