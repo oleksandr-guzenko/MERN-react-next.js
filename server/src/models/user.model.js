@@ -18,7 +18,18 @@ const UserSchema = new Schema({
     required: true,
     trim: true,
     minlength: 8
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
   }
+}, {
+  collection: 'Users',
+  versionKey: 'MERN_STACK_DB_MOVIES'
 })
 
 export const encrpytPassword = async (password) => {
