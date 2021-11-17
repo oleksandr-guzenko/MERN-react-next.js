@@ -4,6 +4,11 @@ import jsonWebToken from 'jsonwebtoken'
 export const Signup = async (req, res) => {
   const {name, email, password} = req.body
 
+  if(!name || !email || !password)
+    return res.status(400).send({
+      error: 'All fields are required'
+    })
+
   const user = new User({
     name, 
     email, 
@@ -16,36 +21,49 @@ export const Signup = async (req, res) => {
     expiresIn: '1d'
   })
 
-  res.send({token})
+  res.json({
+    token,
+    user: {
+      id: savedUser.id,
+      name: savedUser.name,
+      email: savedUser.email
+    }
+  })
 }
 
 export const Signin = async (req, res) => {
   const {email, password} = req.body
+
+  if(!email || !password)
+    return res.status(400).send({
+      error: 'Please provide email and password'
+    })
     
   const user = await User.findOne({email})
     
-  if(!user) {
-    return res.send({error: 'User not found'})
-  }
+  if(!user)
+    return res.status(400).send({
+      error: 'User not found'
+    })
     
-  const isValid = await comparePassword(password, user.password)
+  const isMatch = await comparePassword(password, user.password)
     
-  if(!isValid) {
-    return res.send({
+  if(!isMatch)
+    return res.status(400).send({
       error: 'Invalid password',
       token: null
     })
-  }
     
   const token = jsonWebToken.sign({_id: user._id}, process.env.JWT_SECRET, {
     expiresIn: '1d'
   })
     
   res.json({
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-    message: 'Signin success',
     token,
+    user: {
+      _id: user._id,
+      name: user.name,
+      email: user.email    
+    }
   })
 }
