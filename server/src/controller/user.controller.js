@@ -17,6 +17,11 @@ export const Signup = async (req, res) => {
 
   const savedUser = await user.save()
 
+  if(!savedUser)
+    return res.status(400).send({
+      error: 'User could not be saved'
+    })
+
   const token = jsonWebToken.sign({_id: savedUser._id}, process.env.JWT_SECRET, {
     expiresIn: '1d'
   })
