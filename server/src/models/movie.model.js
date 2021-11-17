@@ -20,6 +20,19 @@ const MovieSchema = Schema({
   images: {
     type: [String]
   },
+  rating: {
+    type: Number,
+    required: true,
+    trim: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  }
 }, {
   collection: 'Movies',
   versionKey: 'MERN_STACK_DB_MOVIES'
