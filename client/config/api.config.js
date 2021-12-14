@@ -1,0 +1,1 @@
+export const USER_API_URL = process.env.USER_API_URL
