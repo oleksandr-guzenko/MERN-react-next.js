@@ -1,7 +1,5 @@
+import Layout from 'components/layout/layout'
 import PropTypes from 'prop-types'
-import {get} from 'helpers/fetchWrapper'
-import PageTitle from 'components/pageTitle/pageTitle'
-import Container from 'components/container/container'
 
 /**
  * @description Details page for a movie
@@ -11,15 +9,12 @@ import Container from 'components/container/container'
  */
 export default function Details({movie}) {
   return (
-    <>
-      <PageTitle title={movie.name} />
-      <Container key={movie._id}>
-        <h1>Details</h1>
-        <h2>{movie.name}</h2>
-        <p>{movie.duration}</p>
-        <p>{movie.synopsis}</p>
-      </Container>
-    </>
+    <Layout>
+      <h1>Details</h1>
+      <h2>{movie.name}</h2>
+      <p>{movie.duration}</p>
+      <p>{movie.synopsis}</p>
+    </Layout>
   )
 }
 
@@ -29,7 +24,8 @@ export default function Details({movie}) {
  * @returns {Object}
  */
 export const getStaticPaths = async () => {
-  const movies = await get(`${process.env.MOVIES_API_URL}/find`)
+  const res = await fetch(`${process.env.MOVIES_API_URL}/find`)
+  const movies = await res.json()
 
   const paths = movies.map((movie) => ({
     params: {id: movie._id}
@@ -48,7 +44,8 @@ export const getStaticPaths = async () => {
  * @returns {Object}
  */
 export const getStaticProps = async ({params}) => {
-  const movie = await get(`${process.env.MOVIES_API_URL}/find/${params.id}`)
+  const res = await fetch(`${process.env.MOVIES_API_URL}/find/${params.id}`)
+  const movie = await res.json()
 
   return {
     props: {

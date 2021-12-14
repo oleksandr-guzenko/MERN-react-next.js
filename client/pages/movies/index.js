@@ -1,8 +1,5 @@
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-import {get} from 'helpers/fetchWrapper'
-import PageTitle from 'components/pageTitle/pageTitle'
-import Container from 'components/container/container'
 import styles from 'styles/movies.module.css'
 
 /**
@@ -11,25 +8,18 @@ import styles from 'styles/movies.module.css'
  * @param {*} props 
  * @returns {Component}
  */
-const MoviesList = ({movies}) => {
-  return (
-    <>
-      {
-        movies.map((movie) => {
-          return (
-            <Link href={`/movies/${movie._id}`} key={movie._id}>
-              <a className={styles.movie_container}>
-                <h2>{movie.name}</h2>
-                <p>{movie.duration}</p>
-              </a>
-            </Link>
-          )
-        })
-      }
-    </>
-  )
-}
-
+const MoviesList = ({movies}) => (
+  <>
+    {movies.map((movie) => (
+      <Link href={`/movies/${movie._id}`} key={movie._id}>
+        <a className={styles.movie_container}>
+          <h2>{movie.name}</h2>
+          <p>{movie.duration}</p>
+        </a>
+      </Link>
+    ))}
+  </>
+)
 
 /**
  * @description Movies page
@@ -40,18 +30,14 @@ const MoviesList = ({movies}) => {
 export default function Movies({movies}) {
   return (
     <>
-      <PageTitle title="Movies" />
-      <Container>
-        <h1>Movies</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-          voluptatem, doloremque, quibusdam quisquam dolorum, quidem
-          necessitatibus, quam quisquam quis, quisquam quisquam.
-        </p>
+      <h1>Movies</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+        voluptatem, doloremque, quibusdam quisquam dolorum, quidem
+        necessitatibus, quam quisquam quis, quisquam quisquam.
+      </p>
       
-        <MoviesList movies={movies} />
-      
-      </Container>
+      <MoviesList movies={movies} />
     </>
   )
 }
@@ -62,7 +48,8 @@ export default function Movies({movies}) {
  * @returns {Object}
  */
 export const getStaticProps = async () => {
-  const movies = await get(`${process.env.MOVIES_API_URL}/find`)
+  const res = await fetch(`${process.env.MOVIES_API_URL}/find`)
+  const movies = await res.json()
 
   return {
     props: {
