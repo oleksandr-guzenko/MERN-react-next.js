@@ -1,23 +1,33 @@
+import {useEffect} from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import actions from 'redux/actions/index'
+import {useDispatch} from 'react-redux'
+import {deauthenticate, reauthenticate} from 'redux/actions/authActions'
 import NavBar from 'components/navbar/navbar'
 import Container from 'components/container/container'
 import PageTitle from 'components/pageTitle/pageTitle'
 
-const Layout = ({children, isAuthenticated, deauthenticate}) => (
-  <div>
-    <PageTitle />
-    <NavBar 
-      isAuthenticated={isAuthenticated} 
-      deauthenticate={deauthenticate} 
-    />
+const Layout = ({children, isAuthenticated}) => {
+  const dispatch = useDispatch()
 
-    <Container>
-      {children}
-    </Container>
-  </div>
-)
+  useEffect(() => {
+    if(isAuthenticated)
+      dispatch(reauthenticate(isAuthenticated))
+  }, [])
+
+  return (
+    <div>
+      <PageTitle />
+      <NavBar 
+        isAuthenticated={isAuthenticated} 
+        deauthenticate={dispatch(deauthenticate)}
+      />
+  
+      <Container>
+        {children}
+      </Container>
+    </div>
+  )
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
@@ -25,8 +35,4 @@ Layout.propTypes = {
   deauthenticate: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => (
-  {isAuthenticated: !!state.authentication.token}
-)
-
-export default connect(mapStateToProps, actions)(Layout)
+export default Layout

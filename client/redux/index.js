@@ -1,18 +1,21 @@
 import thunk from 'redux-thunk'
 import reducer from './reducers/index'
 import {createWrapper} from 'next-redux-wrapper'
-import {initialState} from 'redux/reducers/authReducer'
-import {createStore, applyMiddleware, compose} from 'redux'
-import {composeWithDevTools} from 'redux-devtools-extension'
+import {createStore, applyMiddleware} from 'redux'
+
+const bindMiddleware = (middleware) => {
+  if(process.env.NODE_ENV !== 'production') {
+    const {composeWithDevTools} = require('redux-devtools-extension')
+    return composeWithDevTools(applyMiddleware(...middleware))
+  }
+  return applyMiddleware(...middleware)
+}
 
 const initStore = () => {
-  const composeEnhancers = process.env.NODE_ENV !== 'production' ? composeWithDevTools : compose
-
   return createStore(
-    reducer, 
-    initialState, 
-    composeEnhancers(applyMiddleware(thunk))
+    reducer,
+    bindMiddleware([thunk])
   )
 }
 
-export default createWrapper(initStore, {debug: true})
+export const wrapper = createWrapper(initStore)

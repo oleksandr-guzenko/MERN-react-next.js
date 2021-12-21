@@ -1,49 +1,72 @@
+import Router from 'next/router'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import initialize from 'helpers/initialize'
+import {useState, useEffect} from 'react'
+import {wrapper} from '../../redux/index'
 import Layout from 'components/layout/layout'
+import {authenticate, checkServerSideCookie} from 'redux/actions/authActions'
 
-function SignIn() {
+const Signin = ({authenticate, token}) => {
+  const [email, setEmail] = useState('admin@gmail.com')
+  const [password, setPassword] = useState('secret')
 
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    authenticate({email, password})
+  }
 
-  const handleSubmit = () => {}
-
-  const handleChange = () => {}
+  useEffect(() => {
+    if (token) {
+      Router.push('/')
+    }
+  }, [])
 
   return (
-    <Layout title="SignIn">
-      <form>
-        <h1>Sign In</h1>
-
-        {error && <p>{error}</p>}
-
-        <input 
-          type='email' 
-          name='email' 
-          onChange={handleChange} 
-        />
-
-        <input
-          type='password' 
-          name='password' 
-          onChange={handleChange} 
-        />
-
-        <button 
-          disabled={loading} 
-          onClick={handleSubmit}
-        >
-            SignIn
-        </button>
-
+    <Layout title="Sign In" isAuthenticated={token}>
+      <h3>Sign In</h3>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input
+            type="email"
+            placeholder="Email"
+            required
+            value={email}
+            onChange={({target}) => setEmail(target.value)}
+          />
+        </div>
+        <div>
+          <input
+            className="input"
+            type="password"
+            placeholder="Password"
+            required
+            value={password}
+            onChange={({target}) => setPassword(target.value)}
+          />
+        </div>
+        <div>
+          <button type="submit">Sign In</button>
+        </div>
       </form>
     </Layout>
   )
 }
 
-SignIn.getInitialProps = (context) => {
-  initialize(context)
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async ({req}) => {
+    checkServerSideCookie({req, store})
+    const token = store.getState().authentication.token
+    return {
+      props: {
+        token,
+      },
+    }
+  }
+)
+
+Signin.propTypes = {
+  authenticate: PropTypes.func.isRequired,
+  token: PropTypes.string,
 }
 
-export default connect((state) => state)(SignIn)
+export default connect((state) => state, {authenticate})(Signin)

@@ -14,6 +14,7 @@ export default (state = initialState, action) => {
     }
   case AUTHENTICATE:
     return {
+      ...state,
       token: action.payload
     }
   case DEAUTHENTICATE:
