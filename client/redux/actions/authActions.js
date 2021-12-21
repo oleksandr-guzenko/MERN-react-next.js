@@ -1,15 +1,12 @@
 import axios from 'axios'
+import cookie from 'js-cookie'
 import Router from 'next/router'
 import {USER_API_URL} from 'config/api.config'
 import {AUTHENTICATE, DEAUTHENTICATE} from '../types'
-import {setCookie, removeCookie} from 'helpers/cookiesHelper'
 
-const authenticate = ({email, password}, type) => {
-  if(type !== 'signin' && type !== 'signup')
-    throw new Error('Wrong API call')
-
+export const authenticate = ({email, password}) => {
   return (dispatch) => {
-    axios.post(`${USER_API_URL}/${type}`, {email, password})
+    axios.post(`${USER_API_URL}/signin`, {email, password})
       .then(({data}) => {
         setCookie('token', data.token)
         Router.push('/')
@@ -24,25 +21,63 @@ const authenticate = ({email, password}, type) => {
   }
 }
 
-const reauthenticate = (token) => {
-  return (dispatch) => {
+export const reauthenticate = (token) => 
+  (dispatch) => {
     dispatch({
       type: AUTHENTICATE,
       payload: token
     })
   }
-}
 
-const deauthenticate = () => {
-  return (dispatch) => {
+
+export const deauthenticate = () => 
+  (dispatch) => {
     removeCookie('token')
     Router.push('/')
     dispatch({type: DEAUTHENTICATE})
   }
+
+export function checkServerSideCookie({req, store}) {
+  const token = getCookie('token', req)
+  if(token)
+    store.dispatch(reauthenticate(token))
 }
 
-export default {
-  authenticate,
-  reauthenticate,
-  deauthenticate,
+export function setCookie(key, value) {
+  if (process.browser) {
+    cookie.set(key, value, {
+      expires: 1,
+      path: '/'
+    })
+  }
+}
+
+export function getCookie(key, req) {
+  return process.browser
+    ? getCookieFromBrowser(key)
+    : getCookieFromServer(key, req)
+}
+
+export function removeCookie(key) {
+  if (process.browser) {
+    cookie.remove(key, {
+      expires: 1
+    })
+  }
+}
+
+export const getCookieFromBrowser = (key) => {
+  return cookie.get(key)
+}
+
+export const getCookieFromServer = (key, req) => {
+  if (!req.headers.cookie) return undefined
+
+  const rawCookie = req.headers.cookie
+    .split(';')
+    .find((c) => c.trim().startsWith(`${key}=`))
+  
+  if (!rawCookie) return undefined
+  
+  return rawCookie.split('=')[1]
 }

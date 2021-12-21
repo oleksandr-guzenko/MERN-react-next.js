@@ -1,31 +1,16 @@
 import 'styles/globals.css'
 import PropTypes from 'prop-types'
-import {Provider} from 'react-redux'
-import {Container} from 'next/app'
-import wrapper from '../redux/index'
+import {wrapper} from '../redux/index'
 
-function App({Component, pageProps, store}) {
+function MyApp({Component, pageProps}) {
   return (
-    <Container>
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
-    </Container>
+    <Component {...pageProps} />
   )
 }
 
-App.getInitialProps = async ({Component, ctx}) => {
-  const pageProps = Component.getInitialProps
-    ? await Component.getInitialProps(ctx)
-    : {}
-    
-  return {pageProps}
-}
+export default wrapper.withRedux(MyApp)
 
-export default wrapper.withRedux(App)
-
-App.propTypes = {
+MyApp.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired
 }
