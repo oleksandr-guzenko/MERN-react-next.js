@@ -1,19 +1,16 @@
-import PropTypes from 'prop-types'
-import NavBar from 'components/navbar/navbar'
 import 'styles/globals.css'
+import PropTypes from 'prop-types'
+import {wrapper} from '../redux/index'
 
-function App({Component, pageProps}) {
+function MyApp({Component, pageProps}) {
   return (
-    <>
-      <NavBar />
-      <Component {...pageProps} />
-    </>
+    <Component {...pageProps} />
   )
 }
 
-App.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-  pageProps: PropTypes.object.isRequired
-}
+export default wrapper.withRedux(MyApp)
 
-export default App
+MyApp.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  pageProps: PropTypes.object.isRequired,
+}

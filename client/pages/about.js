@@ -1,23 +1,27 @@
-import Container from 'components/container/container'
-import PageTitle from 'components/pageTitle/pageTitle'
+import {connect} from 'react-redux'
+import initialize from 'helpers/initialize'
+import Layout from 'components/layout/layout'
 
 /**
  * @description About page
  * 
  * @returns {Component}
  */
-export default function About() {
+function About() {
   return (
-    <>
-      <PageTitle title="About" />
-      <Container>
-        <h1>About</h1>
-        <p>
+    <Layout title='About'>
+      <h1>About</h1>
+      <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
         voluptatem, doloremque, quibusdam quisquam dolorum, quidem
         necessitatibus, quam quisquam quis, quisquam quisquam.
-        </p>
-      </Container>
-    </>
+      </p>
+    </Layout>
   )
 }
+
+About.getInitialProps = function(context) {
+  initialize(context)
+}
+
+export default connect((state) => state)(About)
