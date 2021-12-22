@@ -1,4 +1,4 @@
-# MERN STACK DB MOVIES
+# NEXTJS_MERN_STACK_REDUX_DB_MOVIES
 
 [![Twitter](https://img.shields.io/twitter/follow/Derian_Cordoba?label=Follow&style=social)](https://twitter.com/Derian_Cordoba)
 
@@ -15,16 +15,22 @@
 │   │   ├── alert
 │   │   ├── button
 │   │   ├── container
+│   │   ├── layout
+│   │   ├── movie
 │   │   ├── navbar
 │   │   └── pageTitle
 │   ├── config
-│   ├── helpers
 │   ├── pages
 │   │   ├── api
+│   │   ├── auth
 │   │   └── movies
 │   ├── public
+│   ├── redux
+│   │   ├── actions
+│   │   └── reducers
 │   └── styles
 └── server
+    ├── node_modules
     └── src
         ├── config
         ├── controller

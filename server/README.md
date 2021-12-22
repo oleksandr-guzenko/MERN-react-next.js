@@ -35,7 +35,7 @@ JWT_SECRET_KEY=YOUR_JWT_SECRET # Secret used to sign the JWT, example: JWT_SECRE
 ## Technologies
 
 - <div align="justify">
-    We must have <a href="https://nodejs.org/es/">Npm and NodeJs</a> installed, optionally and for ease when executing our application, <a href="https://www.docker.com/">Docker</a> and <a href="https://docs.docker.com/compose/install/">docker-compose</a> could be installed with which we will encapsulate our server within virtual containers.
+    We must have <a href="https://nodejs.org/es/" target="_blank">Npm and NodeJs</a> installed, optionally and for ease when executing our application, <a href="https://www.docker.com/" target="_blank">Docker</a> and <a href="https://docs.docker.com/compose/install/" target="_blank">docker-compose</a> could be installed with which we will encapsulate our server within virtual containers.
   </div>
 
 ## Installation for development with docker-compose (Recommended)
@@ -57,11 +57,11 @@ npm start
 ```
 
 <div align="justify">
-  Now you can visit: <a href="http://localhost:4000">http://localhost:4000</a>
+  Now you can visit: <a href="http://localhost:4000" target="_blank">http://localhost:4000</a>
 </div>
 
 ## Use the deployed application
 
 <div align="justify">
-  They can make use of the application deployed within the heroku server by visiting <a href="https://movies-api-pplam.herokuapp.com/">Deployed application</a> and from that url make requests to the server through the same routes, only changing the origin host to the one before mentioned
+  They can make use of the application deployed within the heroku server by visiting <a href="https://movies-api-pplam.herokuapp.com/" target="_blank">Deployed application</a> and from that url make requests to the server through the same routes, only changing the origin host to the one before mentioned
 </div>
