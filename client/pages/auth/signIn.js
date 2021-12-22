@@ -7,8 +7,8 @@ import Layout from 'components/layout/layout'
 import {authenticate, checkServerSideCookie} from 'redux/actions/authActions'
 
 const Signin = ({authenticate, token}) => {
-  const [email, setEmail] = useState('admin@gmail.com')
-  const [password, setPassword] = useState('secret')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()

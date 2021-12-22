@@ -16,14 +16,15 @@ const Layout = ({children, isAuthenticated}) => {
 
   return (
     <div>
-      <PageTitle />
+      <PageTitle title='Home' />
       <NavBar 
         isAuthenticated={isAuthenticated} 
-        deauthenticate={dispatch(deauthenticate)}
+        deauthenticate={deauthenticate}
       />
   
       <Container>
         {children}
+        <div id="modal-container"></div>
       </Container>
     </div>
   )
@@ -31,8 +32,7 @@ const Layout = ({children, isAuthenticated}) => {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  deauthenticate: PropTypes.func.isRequired
+  isAuthenticated: PropTypes.string
 }
 
 export default Layout
