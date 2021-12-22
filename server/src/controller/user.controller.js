@@ -1,5 +1,5 @@
-import User, {encrpytPassword, comparePassword} from '../models/user.model'
 import jsonWebToken from 'jsonwebtoken'
+import User, {encrpytPassword, comparePassword} from '../models/user.model'
 
 export const Signup = async (req, res) => {
   const {name, email, password} = req.body
@@ -22,7 +22,7 @@ export const Signup = async (req, res) => {
       error: 'User could not be saved'
     })
 
-  const token = jsonWebToken.sign({_id: savedUser._id}, process.env.JWT_SECRET, {
+  const token = jsonWebToken.sign({_id: savedUser._id}, process.env.JWT_SECRET_KEY, {
     expiresIn: '1d'
   })
 
@@ -59,7 +59,7 @@ export const Signin = async (req, res) => {
       token: null
     })
     
-  const token = jsonWebToken.sign({_id: user._id}, process.env.JWT_SECRET, {
+  const token = jsonWebToken.sign({_id: user._id}, process.env.JWT_SECRET_KEY, {
     expiresIn: '1d'
   })
     
