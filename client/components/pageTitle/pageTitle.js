@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
 import Head from 'next/head'
+import PropTypes from 'prop-types'
 
 export default function PageTitle({title}) {
   return (
