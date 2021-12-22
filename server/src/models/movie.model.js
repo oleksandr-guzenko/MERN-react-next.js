@@ -35,7 +35,7 @@ const MovieSchema = Schema({
   }
 }, {
   collection: 'Movies',
-  versionKey: 'MERN_STACK_DB_MOVIES'
+  versionKey: 'NEXTJS_MERN_STACK_REDUX_DB_MOVIES'
 })
 
 const Movie = model('Movie', MovieSchema)

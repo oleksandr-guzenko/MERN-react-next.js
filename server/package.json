@@ -3,14 +3,37 @@
   "version": "1.0.0",
   "description": "Application on the theme of movies making use of the Client and Server method, where the server provides us with an api developed with NodeJs and MongoDB that will be consumed by the Client which is developed with NextJs and React technology.",
   "main": "index.js",
+  "homepage": "https://github.com/DerianCordobaPerez/MERN_STACK_DB_MOVIES/blob/Master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DerianCordobaPerez/MERN_STACK_DB_MOVIES"
+  },
+  "bugs": {
+    "url": "https://github.com/DerianCordobaPerez/MERN_STACK_DB_MOVIES/issues"
+  },
   "scripts": {
     "dev": "nodemon --exec babel-node src/index.js",
     "build": "babel src -d build",
     "start": "node build/index.js",
     "eslint": "eslint . --fix"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "movie",
+    "movies",
+    "api",
+    "nodejs",
+    "server",
+    "client",
+    "nextjs",
+    "react",
+    "redux",
+    "mongo",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": {
+    "name": "Derian Córdoba"
+  },
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.16.3",
