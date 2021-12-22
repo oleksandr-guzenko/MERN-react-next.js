@@ -40,7 +40,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
 )
 
 Index.propTypes = {
-  movies: PropTypes.array.isRequired,
   token: PropTypes.string.isRequired
 }
 

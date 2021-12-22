@@ -1,6 +1,5 @@
 {
   "name": "client",
-  "private": true,
   "author": {
     "name": "Derian Cordoba"
   },
@@ -21,7 +20,6 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "cookie-parser": "^1.4.6",
     "js-cookie": "^3.0.1",
     "next": "^12.0.3",
     "next-redux-wrapper": "^7.0.5",
@@ -34,7 +32,6 @@
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
-    "swr": "^1.1.1",
     "tailwindcss": "^2.2.19"
   },
   "devDependencies": {
