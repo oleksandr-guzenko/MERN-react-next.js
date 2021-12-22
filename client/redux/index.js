@@ -11,7 +11,7 @@ const bindMiddleware = (middleware) => {
   return applyMiddleware(...middleware)
 }
 
-const initStore = () => {
+export default function initStore() {
   return createStore(
     reducer,
     bindMiddleware([thunk])
