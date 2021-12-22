@@ -29,7 +29,7 @@ const UserSchema = new Schema({
   }
 }, {
   collection: 'Users',
-  versionKey: 'MERN_STACK_DB_MOVIES'
+  versionKey: 'NEXTJS_MERN_STACK_REDUX_DB_MOVIES'
 })
 
 export const encrpytPassword = async (password) => {

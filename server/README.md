@@ -29,7 +29,7 @@ DB_PORT=YOUR_DB_PORT # Port of the MongoDB to localhost, example: DB_PORT=27017
 
 DB_NAME=YOUR_DB_NAME # Name of the database, example: DB_NAME=Pplam
 
-JWT_SECRET=YOUR_JWT_SECRET # Secret used to sign the JWT, example: JWT_SECRET=secret
+JWT_SECRET_KEY=YOUR_JWT_SECRET # Secret used to sign the JWT, example: JWT_SECRET_KEY=secret
 ```
 
 ## Technologies
@@ -41,16 +41,16 @@ JWT_SECRET=YOUR_JWT_SECRET # Secret used to sign the JWT, example: JWT_SECRET=se
 ## Installation for development with docker-compose (Recommended)
 
 ```bash
-git clone git@github.com:DerianCordobaPerez/MERN_STACK_DB_MOVIES.git
-cd MERN_STACK_DB_MOVIES
+git clone git@github.com:DerianCordobaPerez/NEXTJS_MERN_STACK_REDUX_DB_MOVIES.git
+cd NEXTJS_MERN_STACK_REDUX_DB_MOVIES
 docker-compose up
 ```
 
 ## Installation (Manually)
 
 ```bash
-git clone git@github.com:DerianCordobaPerez/MERN_STACK_DB_MOVIES.git
-cd MERN_STACK_DB_MOVIES
+git clone git@github.com:DerianCordobaPerez/NEXTJS_MERN_STACK_REDUX_DB_MOVIES.git
+cd NEXTJS_MERN_STACK_REDUX_DB_MOVIES
 npm install
 npm run build
 npm start
@@ -58,4 +58,10 @@ npm start
 
 <div align="justify">
   Now you can visit: <a href="http://localhost:4000">http://localhost:4000</a>
+</div>
+
+## Use the deployed application
+
+<div align="justify">
+  They can make use of the application deployed within the heroku server by visiting <a href="https://movies-api-pplam.herokuapp.com/">Deployed application</a> and from that url make requests to the server through the same routes, only changing the origin host to the one before mentioned
 </div>
