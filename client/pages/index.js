@@ -1,9 +1,9 @@
+import {useEffect} from 'react'
+import Router from 'next/router'
 import PropTypes from 'prop-types'
 import {wrapper} from '../redux/index'
 import Layout from 'components/layout/layout'
 import {checkServerSideCookie} from 'redux/actions/authActions'
-import {useEffect} from 'react'
-import Router from 'next/router'
 
 /**
  * @description Index page
