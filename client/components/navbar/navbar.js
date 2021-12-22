@@ -1,9 +1,12 @@
 import Link from 'next/link'
 import PropTypes from 'prop-types'
+import {useDispatch} from 'react-redux'
 import styles from './navbar.module.css'
 import {links} from 'config/navbar.config'
 
 export default function NavBar({isAuthenticated, deauthenticate}) {
+  const dispatch = useDispatch()
+
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -32,17 +35,17 @@ export default function NavBar({isAuthenticated, deauthenticate}) {
           </Link>}
         
         {isAuthenticated && 
-        <li onClick={deauthenticate}>
-          <a>
-            Sign Out
-          </a>
-        </li>}
+          <li className={styles.a} onClick={() => dispatch(deauthenticate())}>
+            <a>
+              Sign Out
+            </a>
+          </li>}
       </nav>
     </header>
   )
 }
 
 NavBar.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.string,
   deauthenticate: PropTypes.func.isRequired
 }
