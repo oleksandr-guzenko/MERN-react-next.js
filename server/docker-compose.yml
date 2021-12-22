@@ -1,21 +1,28 @@
-version: "3.8"
+version: "3"
 
 services:
   web:
     container_name: movies-app
+    image: node
     restart: always
     build: .
-    # env_file: .env
     ports:
-      - 4000:4000
+      - "4000:4000"
+    links:
+      - mongo
     volumes:
       - .:/usr/src/app
-    #    links:
-    #      - mongo
-#  mongo:
-#    container_name: movies-mongo
-#    image: mongo
-#    ports:
-#      - "27017:27017"
-#    logging:
-#      driver: none
+    environment:
+      - PORT=${PORT}
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+  mongo:
+    container_name: movies-db
+    image: mongo
+    ports:
+      - "27018:27017"
+    logging:
+      driver: none
