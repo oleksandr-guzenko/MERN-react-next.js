@@ -1,34 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🗒️ Client documentation
 
-## Getting Started
+- <div align="justify">
+    💻 The client is developed with <a href="https://nextjs.org/" target="_blank">Next Js</a> from where it will be consulted towards the Api, on the part of the frontend as such it is being made of pure CSS without any framework that helps with the styles section.
+  </div>
 
-First, run the development server:
+- <div align="justify">
+    📋 Through the cookies the token given from the api orchestrated by <a href="https://jwt.io/" target="_blank">JWT</a> is stored, within the management of the cookies will be done based on a global context using <a href="https://redux.js.org/" target="_blank">Redux</a>, <a href="https://react-redux.js.org/" target="_blank">Redux-React</a> and <a href="https://github.com/kirill-konshin/next-redux-wrapper" target="_blank">Next-Redux-Wrapper</a> apart, all this will be done by the server To avoid misuses from the client, everything is divided into the Actions passed to our Reducers which will provide global services to the application.
+  </div>
+
+  <div align="justify">
+    🤝 In compensation of not using the dynamic generation of routes or GetStaticPaths, the movies will be presented through independent modal windows using the <a href="https://www.npmjs.com/package/react-modal" target="_blank">React-Modal</a> library which will provide us with almost the same result as the aforementioned through dynamic routes.
+  </div>
+
+## Environment variables
+
+- <div align="justify">
+    📝  Within this project we must create a .env file where different environment variables will be used that will help us to make requests to the api as the definition for the analytical variables of the next js itself.
+  </div>
 
 ```bash
-npm run dev
-# or
-yarn dev
+# Next expose
+NEXT_PUBLIC_ANALYTICS_ID=YOUR_KEY_FAVORITE
+NEXT_PUBLIC_ENV_VARIABLE=YOUR_KEY_FAVORITE
+
+# Web protocol
+# Use https for production
+PROTOCOL=http
+
+# API Protocols
+API_PORT=4000
+# Use PORT only development
+API_HOST=localhost:$API_PORT
+
+# API URL's
+# These routes should not be changed because they are the different calls to the api
+# The port must match the execution of the local server in case of development
+API_URL=$PROTOCOL://$API_HOST/api
+USER_API_URL=$API_URL/authentication
+MOVIES_API_URL=$API_URL/movie
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation (Manually)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```bash
+git clone git@github.com:DerianCordobaPerez/NEXTJS_MERN_STACK_REDUX_DB_MOVIES.git
+cd NEXTJS_MERN_STACK_REDUX_DB_MOVIES/client
+npm install
+npm run build
+npm start
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<div align="justify">
+  Now you can visit: <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>
+</div>
