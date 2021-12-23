@@ -1,13 +1,10 @@
-import axios from 'axios'
-import {MOVIES} from '../types'
-import {MOVIES_API_URL} from 'config/api.config'
+import {MOVIES, MOVIE} from '../types'
+import {getMoviesService, getMovieService} from 'services/movies'
 
 export const getMovies = ({token}) => 
-  (dispatch) => axios.get(`${MOVIES_API_URL}/find`, {
-    headers: {'x-auth-token': token}
-  }).then((response) => dispatch({type: MOVIES, payload: response.data}))
+  async (dispatch) => await getMoviesService({token})
+    .then(({data}) => dispatch({type: MOVIES, payload: data}))
 
 export const getMovie = ({token, id}) => 
-  (dispatch) => axios.get(`${MOVIES_API_URL}/find/${id}`, {
-    headers: {'x-auth-token': token}
-  }).then((response) => dispatch({type: MOVIES, payload: response.data}))
+  async (dispatch) => await getMovieService({token, id})
+    .then(({data}) => dispatch({type: MOVIE, payload: data}))
