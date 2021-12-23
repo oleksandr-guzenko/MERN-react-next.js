@@ -6,6 +6,12 @@
       Application on the theme of movies making use of the Client and Server method, where the server provides us with an api developed with NodeJs and MongoDB that will be consumed by the Client which is developed with NextJs and React technology.
   </div>
 
+## Technologies
+
+- <div align="justify">
+    We must have <a href="https://nodejs.org/es/" target="_blank">Npm and NodeJs</a> installed, optionally and for ease when executing our application, <a href="https://www.docker.com/" target="_blank">Docker</a> and <a href="https://docs.docker.com/compose/install/" target="_blank">docker-compose</a> could be installed with which we will encapsulate our server within virtual containers.
+  </div>
+
 ## Folder structure
 
 ```bash
