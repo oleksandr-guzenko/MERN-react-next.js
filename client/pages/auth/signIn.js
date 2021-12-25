@@ -16,7 +16,7 @@ const Signin = ({authenticate, token}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    authenticate(user, 'signin')
+    authenticate({user, type: 'signin'})
   }
 
   useEffect(() => {

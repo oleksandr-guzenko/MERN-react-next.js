@@ -1,5 +1,5 @@
 import {MOVIES, MOVIE} from '../types'
-import {getMoviesService, getMovieService} from 'services/movies'
+import {getMoviesService, getMovieService} from 'services/moviesService'
 
 export const getMovies = ({token}) => 
   async (dispatch) => await getMoviesService({token})

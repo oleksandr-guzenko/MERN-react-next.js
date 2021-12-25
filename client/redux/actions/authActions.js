@@ -1,16 +1,15 @@
-import axios from 'axios'
 import cookie from 'js-cookie'
 import Router from 'next/router'
-import {USER_API_URL} from 'config/api.config'
 import {AUTHENTICATE, DEAUTHENTICATE} from '../types'
+import {authenticationService} from 'services/authService'
 
-export const authenticate = (user, type) => {
+export const authenticate = ({user, type}) => {
   if(type !== 'signup' && type !== 'signin') {
     throw new Error('Invalid type')
   }
 
-  return (dispatch) => {
-    axios.post(`${USER_API_URL}/${type}`, user)
+  return async (dispatch) => {
+    await authenticationService({user, type})
       .then(({data}) => {
         setCookie('token', data.token)
         Router.push('/')
@@ -32,7 +31,6 @@ export const reauthenticate = (token) =>
       payload: token
     })
   }
-
 
 export const deauthenticate = () => 
   (dispatch) => {
@@ -75,13 +73,17 @@ export const getCookieFromBrowser = (key) => {
 }
 
 export const getCookieFromServer = (key, req) => {
-  if (!req.headers.cookie) return undefined
+  if (!req.headers.cookie) {
+    return undefined
+  }
 
   const rawCookie = req.headers.cookie
     .split(';')
-    .find((c) => c.trim().startsWith(`${key}=`))
+    .find((cookie) => cookie.trim().startsWith(`${key}=`))
   
-  if (!rawCookie) return undefined
+  if (!rawCookie) {
+    return undefined
+  }
   
   return rawCookie.split('=')[1]
 }
