@@ -35,7 +35,7 @@ export default function Movies({token, movies}) {
   const router = useRouter()
 
   return (
-    <Layout isAuthenticated={token}>
+    <Layout title='Movies' isAuthenticated={token}>
       <h1>Movies</h1>
       <MoviesList movies={movies} />
 

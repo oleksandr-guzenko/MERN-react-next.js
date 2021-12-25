@@ -6,7 +6,7 @@ import Container from 'components/container/container'
 import PageTitle from 'components/pageTitle/pageTitle'
 import {deauthenticate, reauthenticate} from 'redux/actions/authActions'
 
-const Layout = ({children, isAuthenticated}) => {
+const Layout = ({children, isAuthenticated, title}) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const Layout = ({children, isAuthenticated}) => {
 
   return (
     <div>
-      <PageTitle title='Home' />
+      <PageTitle title={title} />
       <NavBar 
         isAuthenticated={isAuthenticated} 
         deauthenticate={deauthenticate}
@@ -31,6 +31,7 @@ const Layout = ({children, isAuthenticated}) => {
 }
 
 Layout.propTypes = {
+  title: PropTypes.string,
   children: PropTypes.node.isRequired,
   isAuthenticated: PropTypes.string
 }

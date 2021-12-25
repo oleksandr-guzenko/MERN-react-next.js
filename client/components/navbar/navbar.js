@@ -21,14 +21,14 @@ export default function NavBar({isAuthenticated, deauthenticate}) {
         ))}
         
         {!isAuthenticated && 
-          <Link href="/signin" className={styles.a}>
-            <a>
+          <Link href="/auth/signIn">
+            <a className={styles.a}>
               Sign In
             </a>
           </Link>}
 
         {!isAuthenticated && 
-          <Link href="/signup">
+          <Link href="/auth/signUp">
             <a className={styles.a}>
               Sign Up
             </a>

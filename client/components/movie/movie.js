@@ -22,5 +22,5 @@ export default function Movie({token, id}) {
 
 Movie.propTypes = {
   token: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired
+  id: PropTypes.string
 }
