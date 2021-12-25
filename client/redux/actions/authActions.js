@@ -5,7 +5,6 @@ import {USER_API_URL} from 'config/api.config'
 import {AUTHENTICATE, DEAUTHENTICATE} from '../types'
 
 export const authenticate = (user, type) => {
-  console.log({user, type})
   if(type !== 'signup' && type !== 'signin') {
     throw new Error('Invalid type')
   }
