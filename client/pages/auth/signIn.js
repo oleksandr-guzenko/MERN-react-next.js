@@ -1,3 +1,4 @@
+import {Notify} from 'notiflix'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
@@ -7,16 +8,20 @@ import Layout from 'components/layout/layout'
 import {authenticate, checkServerSideCookie} from 'redux/actions/authActions'
 
 const Signin = ({authenticate, token}) => {
-  const [email, setEmail] = useState('ricardo@gmail.com')
-  const [password, setPassword] = useState('password')
+  const [user, setUser] = useState({email: '', password: ''})
+  
+  const handleChange = (e) => {
+    setUser({...user, [e.target.name]: e.target.value})
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    authenticate({email, password}, 'signin')
+    authenticate(user, 'signin')
   }
 
   useEffect(() => {
     if (token) {
+      Notify.success('You are now logged in!')
       Router.push('/')
     }
   }, [])
@@ -27,21 +32,23 @@ const Signin = ({authenticate, token}) => {
       <form onSubmit={handleSubmit}>
         <div>
           <input
+            name='email'
             type="email"
             placeholder="Email"
             required
-            value={email}
-            onChange={({target}) => setEmail(target.value)}
+            value={user.email}
+            onChange={handleChange}
           />
         </div>
         <div>
           <input
+            name='password'
             className="input"
             type="password"
             placeholder="Password"
             required
-            value={password}
-            onChange={({target}) => setPassword(target.value)}
+            value={user.password}
+            onChange={handleChange}
           />
         </div>
         <div>

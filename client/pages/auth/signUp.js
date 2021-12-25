@@ -1,3 +1,4 @@
+import {Notify} from 'notiflix'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
@@ -7,17 +8,20 @@ import Layout from 'components/layout/layout'
 import {authenticate, checkServerSideCookie} from 'redux/actions/authActions'
 
 const SignUp = ({authenticate, token}) => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [user, setUser] = useState({name: '', email: '', password: ''})
+  
+  const handleChange = (e) => {
+    setUser({...user, [e.target.name]: e.target.value})
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    authenticate({name, email, password}, 'signup')
+    authenticate(user, 'signup')
   }
 
   useEffect(() => {
     if (token) {
+      Notify.success('You are now logged in!')
       Router.push('/')
     }
   }, [])
@@ -26,35 +30,37 @@ const SignUp = ({authenticate, token}) => {
     <Layout title="Sign Up" isAuthenticated={token}>
       <h3>Sign Up</h3>
       <form onSubmit={handleSubmit}>
-
         <div>
           <input
+            name='name'
             type="text"
             placeholder="Name"
             required
-            value={name}
-            onChange={({target}) => setName(target.value)}
+            value={user.name}
+            onChange={handleChange}
           />
         </div>
 
         <div>
           <input
+            name='email'
             type="email"
             placeholder="Email"
             required
-            value={email}
-            onChange={({target}) => setEmail(target.value)}
+            value={user.email}
+            onChange={handleChange}
           />
         </div>
-
+        
         <div>
           <input
+            name='password'
             className="input"
             type="password"
             placeholder="Password"
             required
-            value={password}
-            onChange={({target}) => setPassword(target.value)}
+            value={user.password}
+            onChange={handleChange}
           />
         </div>
         <div>
