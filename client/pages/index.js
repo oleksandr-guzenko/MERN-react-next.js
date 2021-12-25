@@ -1,4 +1,5 @@
 import {useEffect} from 'react'
+import {Notify} from 'notiflix'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
 import {wrapper} from '../redux/index'
@@ -10,15 +11,17 @@ import {checkServerSideCookie} from 'redux/actions/authActions'
  * 
  * @returns {Component}
  */
-function Index({token}) {
+export default function Index({token}) {
 
   useEffect(() => {
-    if(!token)
+    if(!token) {
+      Notify.warning('You are not logged in')
       Router.push('/auth/signIn')
+    }
   })
 
   return (
-    <Layout isAuthenticated={token}>
+    <Layout title='Index' isAuthenticated={token}>
       <h1>Index</h1>
       <p>
         Index page
@@ -40,7 +43,5 @@ export const getServerSideProps = wrapper.getServerSideProps(
 )
 
 Index.propTypes = {
-  token: PropTypes.string.isRequired
+  token: PropTypes.string
 }
-
-export default Index

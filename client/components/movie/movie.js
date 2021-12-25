@@ -1,25 +1,26 @@
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
+import {useMovie} from 'hooks/useMovie'
+import {useDelay} from 'hooks/useDelay'
+import Loading from 'components/loading/loading'
 
-const getMovie = ({movies, id}) => 
-  movies.find((movie) => movie._id === id)
-
-export default function Movie({id, movies}) {
-  const movie = getMovie({movies, id})
-
-  if(!movie) return null
+export default function Movie({token, id}) {
+  const isDelayed = useDelay()
+  const movie = useMovie({token, id})
 
   return (
     <div>
-      <h1>Movie</h1>
-      <p>{movie.name}</p>
-      <p>{movie.duration}</p>
-      <p>{movie.synopsis}</p>
+      {!isDelayed
+        ? <Loading type='bars' color='#7bff' />
+        : <>
+          <p>Name: {movie.name}</p>
+          <p>Duration: {movie.duration}</p>
+          <p>Synopsis: {movie.synopsis}</p>
+        </>}
     </div>
   )
 }
 
 Movie.propTypes = {
-  id: PropType.string,
-  movies: PropType.array,
-  synopsis: PropType.string,
+  token: PropTypes.string.isRequired,
+  id: PropTypes.string
 }

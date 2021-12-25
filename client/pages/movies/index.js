@@ -14,23 +14,17 @@ import {checkServerSideCookie} from 'redux/actions/authActions'
  * @param {*} props 
  * @returns {Component}
  */
-const MoviesList = ({movies}) => {
-  return (
-    <ul>
-      {movies.map(({_id, name, duration}) => (
-        <li key={_id}>
-          <Link 
-            href={`?id=${_id}`}
-            as={`/movie/${name}`}
-          >
-            <a>{name} | {duration}</a>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  )
-}
-
+const MoviesList = ({movies}) => (
+  <ul>
+    {movies.map(({_id, name, duration}) => (
+      <li key={_id}>
+        <Link href={`?id=${_id}`} as={`/movie/${name}`}>
+          <a>{name} | {duration}</a>
+        </Link>
+      </li>
+    ))}
+  </ul>
+)
 /**
  * @description Movies page
  * 
@@ -41,19 +35,15 @@ export default function Movies({token, movies}) {
   const router = useRouter()
 
   return (
-    <Layout isAuthenticated={token}>
+    <Layout title='Movies' isAuthenticated={token}>
       <h1>Movies</h1>
-
       <MoviesList movies={movies} />
 
       <Modal
         isOpen={!!router.query.id}
         onRequestClose={() => router.push('/movies')}
       >
-        <Movie 
-          id={router.query.id} 
-          movies={movies} 
-        />
+        <Movie id={router.query.id} token={token}/>        
       </Modal>
     </Layout>
   )

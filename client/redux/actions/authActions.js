@@ -4,9 +4,13 @@ import Router from 'next/router'
 import {USER_API_URL} from 'config/api.config'
 import {AUTHENTICATE, DEAUTHENTICATE} from '../types'
 
-export const authenticate = ({email, password}) => {
+export const authenticate = (user, type) => {
+  if(type !== 'signup' && type !== 'signin') {
+    throw new Error('Invalid type')
+  }
+
   return (dispatch) => {
-    axios.post(`${USER_API_URL}/signin`, {email, password})
+    axios.post(`${USER_API_URL}/${type}`, user)
       .then(({data}) => {
         setCookie('token', data.token)
         Router.push('/')
