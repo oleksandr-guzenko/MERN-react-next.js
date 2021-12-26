@@ -1,21 +1,21 @@
-import {Notify} from 'notiflix'
+import { Notify } from 'notiflix'
 import Router from 'next/router'
-import {connect} from 'react-redux'
-import {useState, useEffect} from 'react'
-import {wrapper} from '../../redux/index'
+import { connect } from 'react-redux'
+import { useState, useEffect } from 'react'
+import { wrapper } from '../../redux/index'
 import Layout from 'components/layout/layout'
-import {authenticate, checkServerSideCookie} from 'redux/actions/authActions'
+import { authenticate, checkServerSideCookie } from 'redux/actions/authActions'
 
-const Signin = ({authenticate, token}) => {
-  const [user, setUser] = useState({email: '', password: ''})
-  
+const Signin = ({ authenticate, token }) => {
+  const [user, setUser] = useState({ email: '', password: '' })
+
   const handleChange = (e) => {
-    setUser({...user, [e.target.name]: e.target.value})
+    setUser({ ...user, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    authenticate({user, type: 'signin'})
+    authenticate({ user, type: 'signin' })
   }
 
   useEffect(() => {
@@ -59,15 +59,15 @@ const Signin = ({authenticate, token}) => {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async ({req}) => {
-    checkServerSideCookie({req, store})
+  (store) => async ({ req }) => {
+    checkServerSideCookie({ req, store })
     const token = store.getState().authentication.token
     return {
       props: {
-        token,
-      },
+        token
+      }
     }
   }
 )
 
-export default connect((state) => state, {authenticate})(Signin)
+export default connect((state) => state, { authenticate })(Signin)

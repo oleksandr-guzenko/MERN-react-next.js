@@ -1,5 +1,5 @@
-import { Notify } from 'notiflix'
 import Router from 'next/router'
+import { Notify } from 'notiflix'
 import { connect } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { wrapper } from '../../redux/index'
