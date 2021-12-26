@@ -1,5 +1,5 @@
-import {HYDRATE} from 'next-redux-wrapper'
-import {AUTHENTICATE, DEAUTHENTICATE} from '../types'
+import { HYDRATE } from 'next-redux-wrapper'
+import { AUTHENTICATE, DEAUTHENTICATE } from '../types'
 
 export const initialState = {
   token: null

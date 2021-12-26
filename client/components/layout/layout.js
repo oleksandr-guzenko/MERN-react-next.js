@@ -1,5 +1,4 @@
 import {useEffect} from 'react'
-import PropTypes from 'prop-types'
 import {useDispatch} from 'react-redux'
 import NavBar from 'components/navbar/navbar'
 import Container from 'components/container/container'
@@ -28,12 +27,6 @@ const Layout = ({children, isAuthenticated, title}) => {
       </Container>
     </div>
   )
-}
-
-Layout.propTypes = {
-  title: PropTypes.string,
-  children: PropTypes.node.isRequired,
-  isAuthenticated: PropTypes.string
 }
 
 export default Layout

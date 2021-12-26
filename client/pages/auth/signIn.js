@@ -1,6 +1,5 @@
 import {Notify} from 'notiflix'
 import Router from 'next/router'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {useState, useEffect} from 'react'
 import {wrapper} from '../../redux/index'
@@ -70,10 +69,5 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }
   }
 )
-
-Signin.propTypes = {
-  authenticate: PropTypes.func.isRequired,
-  token: PropTypes.string,
-}
 
 export default connect((state) => state, {authenticate})(Signin)

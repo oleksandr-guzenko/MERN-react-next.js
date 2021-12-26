@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import {useMovie} from 'hooks/useMovie'
 import {useDelay} from 'hooks/useDelay'
 import Loading from 'components/loading/loading'
@@ -18,9 +17,4 @@ export default function Movie({token, id}) {
         </>}
     </div>
   )
-}
-
-Movie.propTypes = {
-  token: PropTypes.string.isRequired,
-  id: PropTypes.string
 }

@@ -1,22 +1,21 @@
 import Link from 'next/link'
 import Modal from 'react-modal'
-import PropTypes from 'prop-types'
-import {useRouter} from 'next/router'
-import {wrapper} from '../../redux/index'
+import { useRouter } from 'next/router'
 import Movie from 'components/movie/movie'
+import { wrapper } from '../../redux/index'
 import Layout from 'components/layout/layout'
-import {getMovies} from 'redux/actions/moviesAction'
-import {checkServerSideCookie} from 'redux/actions/authActions'
+import { getMovies } from 'redux/actions/moviesAction'
+import { checkServerSideCookie } from 'redux/actions/authActions'
 
 /**
  * @description Movies list component
- * 
- * @param {*} props 
+ *
+ * @param {*} props
  * @returns {Component}
  */
-const MoviesList = ({movies}) => (
+const MoviesList = ({ movies }) => (
   <ul>
-    {movies.map(({_id, name, duration}) => (
+    {movies.map(({ _id, name, duration }) => (
       <li key={_id}>
         <Link href={`?id=${_id}`} as={`/movie/${name}`}>
           <a>{name} | {duration}</a>
@@ -27,11 +26,11 @@ const MoviesList = ({movies}) => (
 )
 /**
  * @description Movies page
- * 
- * @param {*} props 
+ *
+ * @param {*} props
  * @returns {Component}
  */
-export default function Movies({token, movies}) {
+export default function Movies ({ token, movies }) {
   const router = useRouter()
 
   return (
@@ -43,32 +42,23 @@ export default function Movies({token, movies}) {
         isOpen={!!router.query.id}
         onRequestClose={() => router.push('/movies')}
       >
-        <Movie id={router.query.id} token={token}/>        
+        <Movie id={router.query.id} token={token}/>
       </Modal>
     </Layout>
   )
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async ({req}) => {
-    checkServerSideCookie({req, store})
+  (store) => async ({ req }) => {
+    checkServerSideCookie({ req, store })
     const token = store.getState().authentication.token
-    await store.dispatch(getMovies({token}))
+    await store.dispatch(getMovies({ token }))
     const movies = store.getState().movies.movies
     return {
       props: {
         token,
         movies
-      },
+      }
     }
   }
 )
-
-MoviesList.propTypes = {
-  movies: PropTypes.array
-}
-
-Movies.propTypes = {
-  token: PropTypes.string,
-  movies: PropTypes.array
-}

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import PropTypes from 'prop-types'
 import {useDispatch} from 'react-redux'
 import styles from './navbar.module.css'
 import {links} from 'config/navbar.config'
@@ -43,9 +42,4 @@ export default function NavBar({isAuthenticated, deauthenticate}) {
       </nav>
     </header>
   )
-}
-
-NavBar.propTypes = {
-  isAuthenticated: PropTypes.string,
-  deauthenticate: PropTypes.func.isRequired
 }
