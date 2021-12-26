@@ -1,23 +1,26 @@
+import { Notify } from 'notiflix'
 import Router from 'next/router'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {useState, useEffect} from 'react'
-import {wrapper} from '../../redux/index'
+import { connect } from 'react-redux'
+import { useState, useEffect } from 'react'
+import { wrapper } from '../../redux/index'
 import Layout from 'components/layout/layout'
-import {authenticate, checkServerSideCookie} from 'redux/actions/authActions'
+import { authenticate, checkServerSideCookie } from 'redux/actions/authActions'
 
-const SignUp = ({authenticate, token}) => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+const SignUp = ({ authenticate, token }) => {
+  const [user, setUser] = useState({ name: '', email: '', password: '' })
+
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    authenticate({name, email, password}, 'signup')
+    authenticate({ user, type: 'signup' })
   }
 
   useEffect(() => {
     if (token) {
+      Notify.success('You are now logged in!')
       Router.push('/')
     }
   }, [])
@@ -26,35 +29,37 @@ const SignUp = ({authenticate, token}) => {
     <Layout title="Sign Up" isAuthenticated={token}>
       <h3>Sign Up</h3>
       <form onSubmit={handleSubmit}>
-
         <div>
           <input
+            name='name'
             type="text"
             placeholder="Name"
             required
-            value={name}
-            onChange={({target}) => setName(target.value)}
+            value={user.name}
+            onChange={handleChange}
           />
         </div>
 
         <div>
           <input
+            name='email'
             type="email"
             placeholder="Email"
             required
-            value={email}
-            onChange={({target}) => setEmail(target.value)}
+            value={user.email}
+            onChange={handleChange}
           />
         </div>
 
         <div>
           <input
+            name='password'
             className="input"
             type="password"
             placeholder="Password"
             required
-            value={password}
-            onChange={({target}) => setPassword(target.value)}
+            value={user.password}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -66,20 +71,15 @@ const SignUp = ({authenticate, token}) => {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async ({req}) => {
-    checkServerSideCookie({req, store})
+  (store) => async ({ req }) => {
+    checkServerSideCookie({ req, store })
     const token = store.getState().authentication.token
     return {
       props: {
-        token,
-      },
+        token
+      }
     }
   }
 )
 
-SignUp.propTypes = {
-  authenticate: PropTypes.func.isRequired,
-  token: PropTypes.string,
-}
-
-export default connect((state) => state, {authenticate})(SignUp)
+export default connect((state) => state, { authenticate })(SignUp)
