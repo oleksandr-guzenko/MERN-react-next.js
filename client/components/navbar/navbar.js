@@ -1,45 +1,206 @@
 import Link from 'next/link'
+import { useState } from 'react'
+import Box from '@mui/material/Box'
+import Menu from '@mui/material/Menu'
+import Slide from '@mui/material/Slide'
+import AppBar from '@mui/material/AppBar'
+import Button from '@mui/material/Button'
 import { useDispatch } from 'react-redux'
-import styles from './navbar.module.css'
-import { links } from 'config/navbar.config'
+import Toolbar from '@mui/material/Toolbar'
+import Tooltip from '@mui/material/Tooltip'
+import MenuItem from '@mui/material/MenuItem'
+import MenuIcon from '@mui/icons-material/Menu'
+import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import CssBaseline from '@mui/material/CssBaseline'
+import { links, profileLinks } from 'config/navbar.config'
+import useScrollTrigger from '@mui/material/useScrollTrigger'
 
-export default function NavBar ({ isAuthenticated, deauthenticate }) {
-  const dispatch = useDispatch()
+function HideOnScroll ({ children, window }) {
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined
+  })
 
   return (
-    <header className={styles.header}>
-      <div className={styles.logo}>
-        <h3>LOGO</h3>
-      </div>
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  )
+}
 
-      <nav className={styles.nav}>
-        {links.map((link) => (
-          <Link href={link.path} key={link.path}>
-            <a className={styles.a}>{link.name}</a>
-          </Link>
-        ))}
+export default function NavBar (props) {
+  const dispatch = useDispatch()
+  const { isAuthenticated, deauthenticate } = props
+  const [anchorElNav, setAnchorElNav] = useState(null)
+  const [anchorElUser, setAnchorElUser] = useState(null)
 
-        {!isAuthenticated &&
-          <Link href="/auth/signIn">
-            <a className={styles.a}>
-              Sign In
-            </a>
-          </Link>}
+  const handleOpenNavMenu = ({ currentTarget }) => {
+    setAnchorElNav(currentTarget)
+  }
+  const handleOpenUserMenu = ({ currentTarget }) => {
+    setAnchorElUser(currentTarget)
+  }
 
-        {!isAuthenticated &&
-          <Link href="/auth/signUp">
-            <a className={styles.a}>
-              Sign Up
-            </a>
-          </Link>}
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null)
+  }
 
-        {isAuthenticated &&
-          <li className={styles.a} onClick={() => dispatch(deauthenticate())}>
-            <a>
-              Sign Out
-            </a>
-          </li>}
-      </nav>
-    </header>
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null)
+  }
+
+  return (
+    <>
+      <CssBaseline />
+      <HideOnScroll {...props}>
+        <AppBar>
+          <Toolbar>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            >
+                LOGO
+            </Typography>
+
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left'
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left'
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' }
+                }}
+              >
+                {links.map(({ name, path }) => (
+                  <MenuItem key={name} onClick={handleCloseNavMenu}>
+                    <Link href={path}>
+                      <a>{name}</a>
+                    </Link>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+            >
+              LOGO
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              {links.map(({ name, path }) => (
+                <Button
+                  key={name}
+                  component='div'
+                  sx={{ mr: 2, color: 'inherit' }}
+                >
+                  <Link href={path}>
+                    <a>{name}</a>
+                  </Link>
+                </Button>
+              ))}
+            </Box>
+            {isAuthenticated && (
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open profile">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Typography
+                      variant="h6"
+                      noWrap
+                      component="div"
+                      sx={{ flexGrow: 1, color: 'white', display: { xs: 'flex', md: 'flex' } }}
+                    >
+                      Profile
+                    </Typography>
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {profileLinks.map(({ name, path }) => (
+                    <MenuItem key={name} onClick={handleCloseUserMenu}>
+                      <Link href={path}>
+                        <a>{name}</a>
+                      </Link>
+                    </MenuItem>
+                  ))}
+
+                  {isAuthenticated && (
+                    <MenuItem onClick={() => dispatch(deauthenticate())}>
+                      <Typography
+                        variant="p"
+                        noWrap
+                        component="div"
+                        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}
+                      >
+                        Logout
+                      </Typography>
+                    </MenuItem>
+                  )}
+                </Menu>
+              </Box>
+            )}
+
+            {!isAuthenticated && (
+              <Box sx={{ flexGrow: 0 }}>
+                <Button
+                  component='div'
+                  sx={{ mr: 2, color: 'inherit' }}
+                >
+                  <Link href='/auth/signIn'>
+                    <a>SignIn</a>
+                  </Link>
+                </Button>
+                <Button
+                  component='div'
+                  sx={{ mr: 2, color: 'inherit' }}
+                >
+                  <Link href='/auth/signUp'>
+                    <a>SignUp</a>
+                  </Link>
+                </Button>
+              </Box>
+            )}
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
+      <Toolbar />
+    </>
   )
 }

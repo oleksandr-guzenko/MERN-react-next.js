@@ -1,9 +1,9 @@
-import { container } from './container.module.css'
+import Container from '@mui/material/Container'
 
-export default function Container ({ children }) {
+export default function CustomContainer ({ children, maxWidth = 'sm' }) {
   return (
-    <div className={container}>
+    <Container maxWidth={maxWidth}>
       {children}
-    </div>
+    </Container>
   )
 }

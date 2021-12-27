@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import NavBar from 'components/navbar/navbar'
-import Container from 'components/container/container'
+import Container from '@mui/material/Container'
 import PageTitle from 'components/pageTitle/pageTitle'
 import { deauthenticate, reauthenticate } from 'redux/actions/authActions'
 
@@ -22,7 +22,6 @@ const Layout = ({ children, isAuthenticated, title }) => {
 
       <Container>
         {children}
-        <div id="modal-container"></div>
       </Container>
     </div>
   )
