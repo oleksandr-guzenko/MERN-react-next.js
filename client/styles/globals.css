@@ -1,3 +1,7 @@
+@import "./auth.module.css";
+@import "./Home.module.css";
+@import "./movies.module.css";
+
 html,
 body {
   padding: 0;

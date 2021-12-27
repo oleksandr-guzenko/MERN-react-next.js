@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Modal from 'react-modal'
-import PropTypes from 'prop-types'
 import { useRouter } from 'next/router'
 import Movie from 'components/movie/movie'
 import { wrapper } from '../../redux/index'
@@ -63,12 +62,3 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }
   }
 )
-
-MoviesList.propTypes = {
-  movies: PropTypes.array
-}
-
-Movies.propTypes = {
-  token: PropTypes.string,
-  movies: PropTypes.array
-}

@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import styles from './navbar.module.css'
-import {links} from 'config/navbar.config'
+import { links } from 'config/navbar.config'
 
-export default function NavBar({isAuthenticated, deauthenticate}) {
+export default function NavBar ({ isAuthenticated, deauthenticate }) {
   const dispatch = useDispatch()
 
   return (
@@ -18,22 +18,22 @@ export default function NavBar({isAuthenticated, deauthenticate}) {
             <a className={styles.a}>{link.name}</a>
           </Link>
         ))}
-        
-        {!isAuthenticated && 
+
+        {!isAuthenticated &&
           <Link href="/auth/signIn">
             <a className={styles.a}>
               Sign In
             </a>
           </Link>}
 
-        {!isAuthenticated && 
+        {!isAuthenticated &&
           <Link href="/auth/signUp">
             <a className={styles.a}>
               Sign Up
             </a>
           </Link>}
-        
-        {isAuthenticated && 
+
+        {isAuthenticated &&
           <li className={styles.a} onClick={() => dispatch(deauthenticate())}>
             <a>
               Sign Out
