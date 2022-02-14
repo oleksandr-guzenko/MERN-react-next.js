@@ -28,9 +28,8 @@ function HideOnScroll ({ children, window }) {
   )
 }
 
-export default function NavBar (props) {
+export default function NavBar ({ isAuthenticated, deauthenticate, ...props }) {
   const dispatch = useDispatch()
-  const { isAuthenticated, deauthenticate } = props
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
 
@@ -53,7 +52,7 @@ export default function NavBar (props) {
     <>
       <CssBaseline />
       <HideOnScroll {...props}>
-        <AppBar>
+        <AppBar color='secondary'>
           <Toolbar>
             <Typography
               variant="h6"
