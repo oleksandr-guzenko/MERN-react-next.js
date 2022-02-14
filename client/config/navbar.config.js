@@ -12,3 +12,10 @@ export const links = [
     path: '/movies'
   }
 ]
+
+export const profileLinks = [
+  {
+    name: 'Account',
+    path: '/user/account'
+  }
+]

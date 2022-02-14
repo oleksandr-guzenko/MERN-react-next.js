@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import styles from './button.module.css'
 
-export default function Button({
+export default function Button ({
   children,
   className,
   disabled,
@@ -12,7 +12,7 @@ export default function Button({
   return (
     <button
       className={classNames(styles.button, className, {
-        [styles.button-disabled]: disabled,
+        [styles.button_disabled]: disabled
       })}
       disabled={disabled}
       onClick={onClick}

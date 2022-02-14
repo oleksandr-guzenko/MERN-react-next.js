@@ -1,29 +1,27 @@
-import {useEffect} from 'react'
-import {useDispatch} from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import NavBar from 'components/navbar/navbar'
-import Container from 'components/container/container'
+import Container from '@mui/material/Container'
 import PageTitle from 'components/pageTitle/pageTitle'
-import {deauthenticate, reauthenticate} from 'redux/actions/authActions'
+import { deauthenticate, reauthenticate } from 'redux/actions/authActions'
 
-const Layout = ({children, isAuthenticated, title}) => {
+const Layout = ({ children, isAuthenticated, title }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if(isAuthenticated)
-      dispatch(reauthenticate(isAuthenticated))
+    if (isAuthenticated) { dispatch(reauthenticate(isAuthenticated)) }
   }, [])
 
   return (
     <div>
       <PageTitle title={title} />
-      <NavBar 
-        isAuthenticated={isAuthenticated} 
+      <NavBar
+        isAuthenticated={isAuthenticated}
         deauthenticate={deauthenticate}
       />
-  
+
       <Container>
         {children}
-        <div id="modal-container"></div>
       </Container>
     </div>
   )

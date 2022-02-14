@@ -11,5 +11,5 @@ export function useDelay (delay = 1) {
     return () => clearTimeout(timer)
   }, [delay])
 
-  return isDelayed
+  return { isDelayed }
 }

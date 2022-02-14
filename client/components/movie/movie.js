@@ -1,10 +1,10 @@
-import {useMovie} from 'hooks/useMovie'
-import {useDelay} from 'hooks/useDelay'
+import { useMovie } from 'hooks/useMovie'
+import { useDelay } from 'hooks/useDelay'
 import Loading from 'components/loading/loading'
 
-export default function Movie({token, id}) {
-  const isDelayed = useDelay()
-  const movie = useMovie({token, id})
+export default function Movie ({ token, id }) {
+  const { isDelayed } = useDelay()
+  const movie = useMovie({ token, id })
 
   return (
     <div>

@@ -31,7 +31,7 @@ const MoviesList = ({ movies }) => (
  * @returns {Component}
  */
 export default function Movies ({ token, movies }) {
-  const router = useRouter()
+  const { query: { id }, push } = useRouter()
 
   return (
     <Layout title='Movies' isAuthenticated={token}>
@@ -39,10 +39,10 @@ export default function Movies ({ token, movies }) {
       <MoviesList movies={movies} />
 
       <Modal
-        isOpen={!!router.query.id}
-        onRequestClose={() => router.push('/movies')}
+        isOpen={!!id}
+        onRequestClose={() => push('/movies')}
       >
-        <Movie id={router.query.id} token={token}/>
+        <Movie id={id} token={token}/>
       </Modal>
     </Layout>
   )
