@@ -36,6 +36,7 @@ export default function NavBar ({ isAuthenticated, deauthenticate, ...props }) {
   const handleOpenNavMenu = ({ currentTarget }) => {
     setAnchorElNav(currentTarget)
   }
+
   const handleOpenUserMenu = ({ currentTarget }) => {
     setAnchorElUser(currentTarget)
   }
