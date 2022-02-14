@@ -9,18 +9,13 @@ export const authenticate = ({ user, type }) => {
   }
 
   return async (dispatch) => {
-    await authenticationService({ user, type })
-      .then(({ data }) => {
-        setCookie('token', data.token)
-        Router.push('/')
-        dispatch({
-          type: AUTHENTICATE,
-          payload: data.token
-        })
-      })
-      .catch((err) => {
-        throw new Error(err)
-      })
+    const { data: { token } } = await authenticationService({ user, type })
+    setCookie('token', token)
+    Router.push('/')
+    dispatch({
+      type: AUTHENTICATE,
+      payload: token
+    })
   }
 }
 
@@ -41,7 +36,9 @@ export const deauthenticate = () =>
 
 export function checkServerSideCookie ({ req, store }) {
   const token = getCookie('token', req)
-  if (token) { store.dispatch(reauthenticate(token)) }
+  if (token) {
+    store.dispatch(reauthenticate(token))
+  }
 }
 
 export function setCookie (key, value) {
